@@ -25,6 +25,10 @@ list:
 
 listi:
 	docker images
+
+ip:
+	docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${ContainerName}
+
 runMySQL:
 	docker run -itd --rm --name ${ContainerName} -p 3306:3306 -v ${CURDIR}data:/var/lib/mysql --env-file ./envfile ${MySQLxImg}
 	docker ps -a
