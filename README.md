@@ -8,14 +8,19 @@ cd dockerdbms
 mkdir data
 ```
 
-* run MySQL container
+* run MySQL Container
 ```
 make run
 ```
 
-* stop MySQL container
+* stop MySQL Container
 ```
 make stop
+```
+
+* Get MySQL Container's IP
+```
+make ip
 ```
 
 * login mysql
