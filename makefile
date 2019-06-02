@@ -2,7 +2,7 @@ MySQLxImg?=mysql:5.7
 ContainerName?=MySQLx
 PMA?=MySQLxPMA
 PMAContainerName=phpmyadmin/phpmyadmin
-DBNAME?=records
+DBNAME?=bots
 
 MKFILE := $(abspath $(lastword $(MAKEFILE_LIST)))
 CURDIR := $(dir $(MKFILE))
