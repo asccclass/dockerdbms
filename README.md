@@ -38,3 +38,8 @@ Before you import data to database, You have to prepare backup.sql or change mak
 ```
 mkae import
 ```
+
+### Use phpmyadmin
+```
+http://yourIP/
+```
