@@ -15,6 +15,7 @@ backup:
 
 import:
 	# docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 < privileges.sql
+	docker exec -it MySQLx mysql -uroot -pwebteam@2019 -e "create database ${DBNAME}"
 	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=${DBNAME} < ${DBNAME}.sql
 
 logs:
