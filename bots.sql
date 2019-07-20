@@ -1,8 +1,9 @@
--- MySQL dump 10.13  Distrib 5.7.23, for Linux (x86_64)
+mysqldump: [Warning] Using a password on the command line interface can be insecure.
+-- MySQL dump 10.13  Distrib 5.7.26, for Linux (x86_64)
 --
 -- Host: localhost    Database: bots
 -- ------------------------------------------------------
--- Server version	5.7.23
+-- Server version	5.7.26
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -12,16 +13,65 @@
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40101 exit
+Bye
+L_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `bots`
+-- Table structure for table `dorelogin`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `bots` /*!40100 DEFAULT CHARACTER SET utf8 */;
+DROP TABLE IF EXISTS `dorelogin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `dorelogin` (
+  `login` varchar(100) NOT NULL DEFAULT '',
+  `passwd` varchar(13) NOT NULL DEFAULT '',
+  `role` varchar(10) NOT NULL DEFAULT '',
+  `ipRange` varchar(100) NOT NULL DEFAULT '',
+  `lifetime` smallint(5) NOT NULL DEFAULT '9600',
+  `ID` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`login`),
+  UNIQUE KEY `login` (`login`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-USE `bots`;
+--
+-- Dumping data for table `doexit
+Bye
+-
+
+LOCK TABLES `dorelogin` WRITE;
+/*!40000 ALTER TABLE `dorelogin` DISABLE KEYS */;
+INSERT INTO `dorelogin` VALUES ('root','xs514Cm9McO.Y','sysAdmin','',9600,1),('justdrink','6njd/r2FZa2e6','','',9600,0),('@sysAdmin','','sysAdmin','',9600,0),('robert','xs514Cm9McO.Y','sysAdmin','',9600,2);
+/*!40000 ALTER TABLE `dorelogin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `doreuser`
+--
+
+DROP TABLE IF EXISTS `doreuser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `doreuser` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL DEFAULT '',
+  `ename` varchar(30) NOT NULL DEFAULT '',
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `doreuser`
+--
+
+LOCK TABLES `doreuser` WRITE;
+/*!40000 ALTER TABLE `doreuser` DISABLE KEYS */;
+INSERT INTO `doreuser` VALUES (1,'智漢','Andy Liu'),(2,'泊灝','Robert');
+/*!40000 ALTER TABLE `doreuser` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `infos`
@@ -114,4 +164,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-22 12:19:14
+-- Dump completed on 2019-07-20 12:39:55
