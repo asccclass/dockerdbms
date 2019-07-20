@@ -3,6 +3,7 @@ ContainerName?=MySQLx
 PMA?=MySQLxPMA
 PMAContainerName=phpmyadmin/phpmyadmin
 DBNAME?=bots
+DBPASSWORD?=webteam@2019
 
 MKFILE := $(abspath $(lastword $(MAKEFILE_LIST)))
 CURDIR := $(dir $(MKFILE))
@@ -11,7 +12,8 @@ login:
 	docker exec -it ${ContainerName} mysql -uroot -p
 
 backup:
-	docker exec -it ${ContainerName} mysql -uroot -p ${DBNAME} > ${DBNAME}.sql
+	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} ${DBNAME} > ${DBNAME}.sql
+	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} records > records.sql
 
 import:
 	# docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 < privileges.sql
