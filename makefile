@@ -15,6 +15,7 @@ backup:
 	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} ${DBNAME} > ${DBNAME}.sql
 	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} records > records.sql
 	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} laitaian > laitaian.sql
+	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} assns > assns.sql
 
 import:
 	# docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 < privileges.sql
