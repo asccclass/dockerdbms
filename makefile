@@ -2,7 +2,7 @@ MySQLxImg?=mysql:5.7
 ContainerName?=MySQLx
 PMA?=MySQLxPMA
 PMAContainerName=phpmyadmin/phpmyadmin
-DBNAME?=bots
+DBNAME?=records
 DBPASSWORD?=webteam@2019
 
 MKFILE := $(abspath $(lastword $(MAKEFILE_LIST)))
@@ -16,6 +16,7 @@ backup:
 	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} records > records.sql
 	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} laitaian > laitaian.sql
 	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} assns > assns.sql
+	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} urpanda > urpanda.sql
 
 import:
 	# docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 < privileges.sql
