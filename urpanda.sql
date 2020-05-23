@@ -1,3 +1,4 @@
+mysqldump: [Warning] Using a password on the command line interface can be insecure.
 -- MySQL dump 10.13  Distrib 5.7.29, for Linux (x86_64)
 --
 -- Host: localhost    Database: urpanda
@@ -24,8 +25,8 @@ DROP TABLE IF EXISTS `activitiez`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `activitiez` (
   `actID` int(11) NOT NULL AUTO_INCREMENT,
-  `ID` int(11) NOT NULL DEFAULT '0' COMMENT '學校代碼',
-  `typez` smallint(6) NOT NULL DEFAULT '0' COMMENT '0)學校 1)協會',
+  `ID` int(11) NOT NULL DEFAULT '0' COMMENT '餐廳代碼',
+  `typez` smallint(6) NOT NULL DEFAULT '0' COMMENT '0)學校 1)附例湯',
   `actType` smallint(6) NOT NULL DEFAULT '0' COMMENT '第幾屆',
   `title` varchar(200) NOT NULL,
   `description` text NOT NULL,
@@ -40,9 +41,9 @@ CREATE TABLE `activitiez` (
   `extradata` text NOT NULL COMMENT '活動結束後可放置照片網址',
   `isClosed` smallint(6) NOT NULL DEFAULT '0' COMMENT '是否結束報名',
   `admission` smallint(6) NOT NULL DEFAULT '0' COMMENT '憑門票入場 Admission by ticket',
-  `cmtID` int(11) NOT NULL DEFAULT '0' COMMENT '委員會代碼',
+  `cmtID` int(11) NOT NULL DEFAULT '0' COMMENT '產品價格',
   PRIMARY KEY (`actID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +52,7 @@ CREATE TABLE `activitiez` (
 
 LOCK TABLES `activitiez` WRITE;
 /*!40000 ALTER TABLE `activitiez` DISABLE KEYS */;
-INSERT INTO `activitiez` VALUES (1,1,0,0,'泰式河粉','','2020-03-01','10:00','2020-05-01','21:30','','https://i.imgur.com/yP571AH.jpg','','','',0,0,0);
+INSERT INTO `activitiez` VALUES (1,3,0,0,'招牌泰式炒粿條（豬肉）','附例湯','2020-03-01','10:00','2020-05-01','21:30','','https://i.imgur.com/yP571AH.jpg','https://liff.line.me/1653968805-KQypaW2x/uorder/showproducts.html?actID=1','','',0,0,200),(2,2,0,0,'府城蝦卷飯','府城蝦卷飯','2020-03-01','10:00','2020-05-01','21:30','','https://i.imgur.com/VYuP8cM.jpg','https://liff.line.me/1653968805-KQypaW2x/uorder/showproducts.html?actID=2','','',0,0,160),(3,3,0,0,'招牌泰式炒粿條（蝦仁）','附例湯','2020-03-01','10:00','2020-05-01','21:30','','https://i.imgur.com/yP571AH.jpg','https://liff.line.me/1653968805-KQypaW2x/uorder/showproducts.html?actID=3','https://liff.line.me/1653968805-KQypaW2x/uorder/showproducts.html/#!/product/3','',0,0,200);
 /*!40000 ALTER TABLE `activitiez` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,13 +65,14 @@ DROP TABLE IF EXISTS `activitiezperson`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `activitiezperson` (
   `apID` int(11) NOT NULL AUTO_INCREMENT,
-  `actID` int(11) NOT NULL,
-  `userID` varchar(120) NOT NULL,
-  `insDate` date NOT NULL DEFAULT '0000-01-01',
+  `orderNo` varchar(50) NOT NULL DEFAULT '0' COMMENT '訂單編號',
+  `actID` int(11) NOT NULL COMMENT '餐廳代碼',
+  `userID` varchar(120) NOT NULL COMMENT '訂購者lineid',
+  `insDate` datetime NOT NULL DEFAULT '0000-01-01 00:00:00' COMMENT '訂單時間',
   `meno` text NOT NULL,
-  `arrived` datetime NOT NULL DEFAULT '0000-01-01 00:00:00',
+  `arrived` datetime NOT NULL DEFAULT '0000-01-01 00:00:00' COMMENT '餐廳接單時間',
   PRIMARY KEY (`apID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,6 +81,7 @@ CREATE TABLE `activitiezperson` (
 
 LOCK TABLES `activitiezperson` WRITE;
 /*!40000 ALTER TABLE `activitiezperson` DISABLE KEYS */;
+INSERT INTO `activitiezperson` VALUES (2,'fe174c00-920311ea-140c0242-ac110006',3,'Ufafd5db8c0424f36e09eddf2d379f064','2020-05-09 14:47:23','','0000-01-01 00:00:00'),(3,'dc1fb2c4-933311ea-346d0242-ac110006',3,'Ud2e05de2ce72f2b0cd386512c6b8b22e','2020-05-11 03:02:33','','0000-01-01 00:00:00');
 /*!40000 ALTER TABLE `activitiezperson` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,9 +99,9 @@ CREATE TABLE `asns` (
   `groupID` varchar(100) NOT NULL DEFAULT '0',
   `sid` varchar(30) NOT NULL COMMENT '統一編號',
   `email` varchar(254) NOT NULL COMMENT '會務信箱',
-  `colorz` varchar(10) NOT NULL DEFAULT '#FFFFFF',
+  `colorz` varchar(254) NOT NULL DEFAULT '臺北市' COMMENT '地址',
   PRIMARY KEY (`asnsID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +110,7 @@ CREATE TABLE `asns` (
 
 LOCK TABLES `asns` WRITE;
 /*!40000 ALTER TABLE `asns` DISABLE KEYS */;
-INSERT INTO `asns` VALUES (1,'安妮沙','','0','','','#FFFFFF');
+INSERT INTO `asns` VALUES (1,'安妮莎泰式料理','https://i.imgur.com/OfEvfP4.png','0','0921609364','11:00～21:00','新光三越A8'),(2,'欣京九','https://i.imgur.com/6L7RgvU.png','0','0921609364','11:00～21:00','新光三越A8'),(3,'泰鑫泰式料理','https://i.imgur.com/MxwJq35.png','0','0921609364','11:00～21:00','GLORIA OUTLETS 華泰名品城');
 /*!40000 ALTER TABLE `asns` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +149,7 @@ DROP TABLE IF EXISTS `asnsperson`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `asnsperson` (
   `asnspersonID` int(11) NOT NULL AUTO_INCREMENT,
-  `usrNo` int(11) NOT NULL COMMENT 'person.usrNo',
+  `usrNo` varchar(60) NOT NULL COMMENT 'lineID',
   `schoolID` int(11) NOT NULL,
   `year` int(11) NOT NULL DEFAULT '0',
   `postionsz` smallint(6) NOT NULL DEFAULT '0' COMMENT '0)會長 1)代表',
@@ -206,7 +209,7 @@ CREATE TABLE `committee` (
   `meno` text NOT NULL,
   `imgurl` varchar(200) NOT NULL COMMENT '圖檔網址',
   PRIMARY KEY (`cmitID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +218,6 @@ CREATE TABLE `committee` (
 
 LOCK TABLES `committee` WRITE;
 /*!40000 ALTER TABLE `committee` DISABLE KEYS */;
-INSERT INTO `committee` VALUES (1,'教育委員會',1,1,0,'',''),(2,'技職委員會',1,2,0,'',''),(3,'公關委員會',1,3,0,'',''),(4,'特教委員會',1,4,0,'',''),(5,'法政委員會',1,5,0,'',''),(6,'資訊委員會',1,6,0,'','');
 /*!40000 ALTER TABLE `committee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -278,6 +280,60 @@ INSERT INTO `funny` VALUES (1,'在那裡跌倒，就在那裡躺下來',0,'','00
 UNLOCK TABLES;
 
 --
+-- Table structure for table `location`
+--
+
+DROP TABLE IF EXISTS `location`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `location` (
+  `locationID` int(11) NOT NULL AUTO_INCREMENT,
+  `HWID` varchar(30) NOT NULL COMMENT '硬體ID',
+  `position` varchar(50) NOT NULL COMMENT '地點',
+  `alias` varchar(50) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`locationID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `location`
+--
+
+LOCK TABLES `location` WRITE;
+/*!40000 ALTER TABLE `location` DISABLE KEYS */;
+INSERT INTO `location` VALUES (1,'013cb769d4','福德街住家','家裡');
+/*!40000 ALTER TABLE `location` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `logz`
+--
+
+DROP TABLE IF EXISTS `logz`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `logz` (
+  `logID` int(11) NOT NULL AUTO_INCREMENT,
+  `orderID` int(11) NOT NULL DEFAULT '0' COMMENT '訂單編號',
+  `lineID` varchar(50) NOT NULL COMMENT '執行動作人員ID',
+  `action` int(11) NOT NULL DEFAULT '0' COMMENT '狀態',
+  `message` varchar(255) NOT NULL DEFAULT '0' COMMENT '資訊',
+  `insTime` datetime NOT NULL DEFAULT '0000-01-01 00:00:00' COMMENT '動作時間',
+  PRIMARY KEY (`logID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `logz`
+--
+
+LOCK TABLES `logz` WRITE;
+/*!40000 ALTER TABLE `logz` DISABLE KEYS */;
+INSERT INTO `logz` VALUES (1,2,'Ufafd5db8c0424f36e09eddf2d379f064',1,'使用者送出訂單','2020-05-14 14:34:33'),(2,3,'Ud2e05de2ce72f2b0cd386512c6b8b22e',1,'使用者送出訂單','2020-05-15 01:34:19');
+/*!40000 ALTER TABLE `logz` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `officialdoc`
 --
 
@@ -306,6 +362,36 @@ LOCK TABLES `officialdoc` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `orderlist`
+--
+
+DROP TABLE IF EXISTS `orderlist`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `orderlist` (
+  `listID` int(11) NOT NULL AUTO_INCREMENT,
+  `apID` int(11) NOT NULL COMMENT '訂單編號',
+  `productID` int(11) NOT NULL DEFAULT '0',
+  `title` varchar(256) NOT NULL DEFAULT '0' COMMENT '商品名稱',
+  `price` int(11) NOT NULL DEFAULT '0' COMMENT '金額',
+  `cnt` int(11) NOT NULL DEFAULT '0' COMMENT '數量',
+  `meno` text NOT NULL COMMENT '備註',
+  `insTime` datetime NOT NULL DEFAULT '0000-01-01 00:00:00' COMMENT '新增時間',
+  PRIMARY KEY (`listID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orderlist`
+--
+
+LOCK TABLES `orderlist` WRITE;
+/*!40000 ALTER TABLE `orderlist` DISABLE KEYS */;
+INSERT INTO `orderlist` VALUES (3,2,3,'招牌泰式炒粿條（蝦仁）',200,1,'','2020-05-09 14:47:23'),(4,3,3,'招牌泰式炒粿條（蝦仁）',200,1,'','2020-05-11 03:02:33');
+/*!40000 ALTER TABLE `orderlist` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `person`
 --
 
@@ -325,8 +411,9 @@ CREATE TABLE `person` (
   `insertDate` date NOT NULL DEFAULT '0000-01-01',
   `qrcode` text NOT NULL,
   `notifyToken` varchar(100) NOT NULL,
+  `location` varchar(20) DEFAULT '0' COMMENT '地點',
   PRIMARY KEY (`usrNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -335,7 +422,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'劉智漢','0921609364','justgps@gmail.com','https://profile.line-scdn.net/0h97hT_Q_lZhhVLUldDEIZT2loaHUiA2BQLUx6fXl5P3hxSXRGOR4ueCcvPH9xGyQcaB59LSQrOH19','Ufafd5db8c0424f36e09eddf2d379f064','智漢（內工32、介壽47）','漢哥','','2020-03-18','','');
+INSERT INTO `person` VALUES (3,'劉智漢','0921609364','justgps@gmail.com','https://profile.line-scdn.net/0h97hT_Q_lZhhVLUldDEIZT2loaHUiA2BQLUx6fXl5P3hxSXRGOR4ueCcvPH9xGyQcaB59LSQrOH19','Ufafd5db8c0424f36e09eddf2d379f064','智漢（內工32、介壽47）','','','2020-04-04','','','1'),(4,'小三','0912345678','justgps@gmail.com','https://profile.line-scdn.net/0hKKk3PnXEFGRWSjgWBzVrM2oPGgkhZBIsLilZB3QaQwZzKlAzaS1dAnNNGVYpKlQzOXwMVnMfTgQu','Ud2e05de2ce72f2b0cd386512c6b8b22e','智漢-私人','','\n','2020-05-04','','','0');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -350,13 +437,13 @@ CREATE TABLE `personassns` (
   `paID` int(11) NOT NULL AUTO_INCREMENT,
   `lineID` varchar(120) NOT NULL,
   `assnsID` int(11) NOT NULL,
-  `positionID` int(11) NOT NULL DEFAULT '0' COMMENT '職稱',
+  `positionID` varchar(30) NOT NULL DEFAULT '0' COMMENT '職稱',
   `yearz` smallint(6) NOT NULL DEFAULT '0',
   `approved` smallint(6) NOT NULL DEFAULT '0',
   `generation` int(11) NOT NULL DEFAULT '0' COMMENT '第幾屆',
   `serialz` smallint(6) NOT NULL DEFAULT '0' COMMENT '得票數',
   PRIMARY KEY (`paID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -365,6 +452,7 @@ CREATE TABLE `personassns` (
 
 LOCK TABLES `personassns` WRITE;
 /*!40000 ALTER TABLE `personassns` DISABLE KEYS */;
+INSERT INTO `personassns` VALUES (1,'Ufafd5db8c0424f36e09eddf2d379f064',3,'櫃台接單人員',0,0,0,0);
 /*!40000 ALTER TABLE `personassns` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -380,7 +468,7 @@ CREATE TABLE `positionz` (
   `name` varchar(30) NOT NULL,
   `serialz` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`positionID`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -389,7 +477,6 @@ CREATE TABLE `positionz` (
 
 LOCK TABLES `positionz` WRITE;
 /*!40000 ALTER TABLE `positionz` DISABLE KEYS */;
-INSERT INTO `positionz` VALUES (1,'總會長',0),(2,'副總會長',1),(3,'監事長',2),(4,'常務理事',3),(5,'常務監事',4),(6,'理事',5),(7,'監事',6),(8,'秘書長',7),(9,'副秘書長',8),(10,'執行長',9),(11,'資訊長',10),(12,'財務長',11),(13,'會計',12),(14,'家長會會長',13),(15,'聯合會代表',14),(16,'校長',0),(17,'總召集人',1),(18,'副召集人',2);
 /*!40000 ALTER TABLE `positionz` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -461,4 +548,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-19  6:39:24
+-- Dump completed on 2020-05-23 10:19:21
