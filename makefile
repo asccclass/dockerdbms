@@ -56,3 +56,5 @@ stop:stopPMA stopMySQL
 run: runMySQL
 	docker run -itd --rm --name ${PMA} --link ${ContainerName} -e PMA_HOST="${ContainerName}" -p 10080:80 ${PMAContainerName}
 	docker ps -a
+
+re: stop run
