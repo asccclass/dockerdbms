@@ -70,6 +70,8 @@ CREATE TABLE `activitiezperson` (
   `userID` varchar(120) NOT NULL COMMENT '訂購者lineid',
   `insDate` datetime NOT NULL DEFAULT '0000-01-01 00:00:00' COMMENT '訂單時間',
   `meno` text NOT NULL,
+  `totalprice` int(11) NOT NULL DEFAULT '0' COMMENT '訂單總價',
+  `status` smallint(6) NOT NULL DEFAULT '0' COMMENT '訂單處理狀態',
   `arrived` datetime NOT NULL DEFAULT '0000-01-01 00:00:00' COMMENT '餐廳接單時間',
   PRIMARY KEY (`apID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
@@ -81,7 +83,7 @@ CREATE TABLE `activitiezperson` (
 
 LOCK TABLES `activitiezperson` WRITE;
 /*!40000 ALTER TABLE `activitiezperson` DISABLE KEYS */;
-INSERT INTO `activitiezperson` VALUES (2,'fe174c00-920311ea-140c0242-ac110006',3,'Ufafd5db8c0424f36e09eddf2d379f064','2020-05-09 14:47:23','','0000-01-01 00:00:00'),(3,'dc1fb2c4-933311ea-346d0242-ac110006',3,'Ud2e05de2ce72f2b0cd386512c6b8b22e','2020-05-11 03:02:33','','0000-01-01 00:00:00');
+INSERT INTO `activitiezperson` VALUES (2,'fe174c00-920311ea-140c0242-ac110006',3,'Ufafd5db8c0424f36e09eddf2d379f064','2020-05-09 14:47:23','',0,0,'0000-01-01 00:00:00'),(3,'dc1fb2c4-933311ea-346d0242-ac110006',3,'Ud2e05de2ce72f2b0cd386512c6b8b22e','2020-05-11 03:02:33','',0,0,'0000-01-01 00:00:00');
 /*!40000 ALTER TABLE `activitiezperson` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,6 +167,34 @@ CREATE TABLE `asnsperson` (
 LOCK TABLES `asnsperson` WRITE;
 /*!40000 ALTER TABLE `asnsperson` DISABLE KEYS */;
 /*!40000 ALTER TABLE `asnsperson` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `asnssheet`
+--
+
+DROP TABLE IF EXISTS `asnssheet`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `asnssheet` (
+  `asID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `asnsID` int(11) NOT NULL,
+  `sheetID` varchar(100) NOT NULL,
+  `sheetName` varchar(100) NOT NULL,
+  `programUrl` varchar(254) NOT NULL,
+  PRIMARY KEY (`asID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `asnssheet`
+--
+
+LOCK TABLES `asnssheet` WRITE;
+/*!40000 ALTER TABLE `asnssheet` DISABLE KEYS */;
+INSERT INTO `asnssheet` VALUES (1,'storeinfo',1,'1wHbbuInHJLk2hmOnYux6e7FciAU44RV0Aj-cwilSuIs','泰鑫','AKfycbztrDK6CSGc7Zg5CsItG98oHLcn4pecL9xlNNOdphmJW1L7T8k');
+/*!40000 ALTER TABLE `asnssheet` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -373,6 +403,7 @@ CREATE TABLE `orderlist` (
   `apID` int(11) NOT NULL COMMENT '訂單編號',
   `productID` int(11) NOT NULL DEFAULT '0',
   `title` varchar(256) NOT NULL DEFAULT '0' COMMENT '商品名稱',
+  `isMain` smallint(6) NOT NULL DEFAULT '0' COMMENT '是否為副餐',
   `price` int(11) NOT NULL DEFAULT '0' COMMENT '金額',
   `cnt` int(11) NOT NULL DEFAULT '0' COMMENT '數量',
   `meno` text NOT NULL COMMENT '備註',
@@ -387,7 +418,7 @@ CREATE TABLE `orderlist` (
 
 LOCK TABLES `orderlist` WRITE;
 /*!40000 ALTER TABLE `orderlist` DISABLE KEYS */;
-INSERT INTO `orderlist` VALUES (3,2,3,'招牌泰式炒粿條（蝦仁）',200,1,'','2020-05-09 14:47:23'),(4,3,3,'招牌泰式炒粿條（蝦仁）',200,1,'','2020-05-11 03:02:33');
+INSERT INTO `orderlist` VALUES (3,2,3,'招牌泰式炒粿條（蝦仁）',0,200,1,'','2020-05-09 14:47:23'),(4,3,3,'招牌泰式炒粿條（蝦仁）',0,200,1,'','2020-05-11 03:02:33');
 /*!40000 ALTER TABLE `orderlist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -538,6 +569,31 @@ LOCK TABLES `schools` WRITE;
 /*!40000 ALTER TABLE `schools` DISABLE KEYS */;
 /*!40000 ALTER TABLE `schools` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `sender`
+--
+
+DROP TABLE IF EXISTS `sender`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sender` (
+  `senderID` int(11) NOT NULL AUTO_INCREMENT,
+  `senderName` varchar(30) NOT NULL,
+  `senderImage` varchar(120) NOT NULL,
+  `meno` text NOT NULL,
+  PRIMARY KEY (`senderID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sender`
+--
+
+LOCK TABLES `sender` WRITE;
+/*!40000 ALTER TABLE `sender` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sender` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -548,4 +604,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-30  6:30:40
+-- Dump completed on 2021-03-19  2:50:26
