@@ -21,11 +21,11 @@ backup:
 
 import:
 	# docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 < privileges.sql
-	#docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=${DBNAME} < ${DBNAME}.sql
-	#docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=records < records.sql
-	#docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=laitaian < laitaian.sql
-	#docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=urpanda < urpanda.sql
-	#docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=urpanda < assns.sql
+	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=${DBNAME} < ${DBNAME}.sql
+	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=records < records.sql
+	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=laitaian < laitaian.sql
+	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=urpanda < urpanda.sql
+	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=assns < assns.sql
 	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=ascare < ascare.sql
 
 logs:

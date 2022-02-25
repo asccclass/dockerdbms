@@ -36,7 +36,7 @@ make export
 * import db
 Before you import data to database, You have to prepare backup.sql or change makefile's import command.
 ```
-mkae import
+make import
 ```
 
 ### Use phpmyadmin
