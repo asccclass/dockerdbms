@@ -39,6 +39,12 @@ Before you import data to database, You have to prepare backup.sql or change mak
 make import
 ```
 
+### 檢查MySQL是否啟動
+
+```
+docker exec ${ContainerName} mysqladmin -uroot -p${DBPASSWORD} ping
+```
+
 ### Use phpmyadmin
 ```
 http://yourIP/
