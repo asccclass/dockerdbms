@@ -58,3 +58,6 @@ run: runMySQL
 	docker ps -a
 
 re: stop run
+
+test:
+	docker exec ${ContainerName} mysqladmin -uroot -p${DBPASSWORD} ping
