@@ -40,10 +40,6 @@ listi:
 ip:
 	docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${ContainerName}
 
-runMySQL:
-	docker run -itd --rm --name ${ContainerName} -p 3306:3306 -v ${CURDIR}data:/var/lib/mysql --env-file ./envfile ${MySQLxImg}
-	docker ps -a
-
 stopMySQL:
 	docker stop ${ContainerName}
 
@@ -53,8 +49,19 @@ stopPMA:
 stop:stopPMA stopMySQL
 	docker ps -a
 
+runMySQL:
+	docker run -itd --rm --name ${ContainerName} \
+	-p 3306:3306 \
+	-v ${CURDIR}data:/var/lib/mysql \
+	--env-file ./envfile \
+	${MySQLxImg}
+	docker ps -a
+
 run: runMySQL
-	docker run -itd --rm --name ${PMA} --link ${ContainerName} -e PMA_HOST="${ContainerName}" -p 10080:80 ${PMAContainerName}
+	docker run -itd --rm --name ${PMA} \
+	--link ${ContainerName} \
+	-e PMA_HOST="${ContainerName}" \
+	-p 10080:80 ${PMAContainerName}
 	docker ps -a
 
 re: stop run
