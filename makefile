@@ -50,7 +50,7 @@ stop:stopPMA stopMySQL
 	docker ps -a
 
 runMySQL:
-	docker run -itd --rm --name ${ContainerName} \
+	docker run -itd --name ${ContainerName} \
 	-p 3306:3306 \
 	-v ${CURDIR}data:/var/lib/mysql \
 	--env-file ./envfile \
@@ -65,6 +65,9 @@ run: runMySQL
 	docker ps -a
 
 re: stop run
+
+rm:
+	docker rm ${ContainerName}
 
 test:
 	docker exec ${ContainerName} mysqladmin -uroot -p${DBPASSWORD} ping
