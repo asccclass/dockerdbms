@@ -57,12 +57,14 @@ runMySQL:
 	${MySQLxImg}
 	docker ps -a
 
-run: runMySQL
+runPhpMyAdmin:
 	docker run -itd --rm --name ${PMA} \
 	--link ${ContainerName} \
 	-e PMA_HOST="${ContainerName}" \
 	-p 10080:80 ${PMAContainerName}
 	docker ps -a
+
+run: runMySQL runPhpMyAdmin
 
 re: stop run
 
