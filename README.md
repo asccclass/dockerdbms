@@ -1,4 +1,5 @@
 # Stand alone Docker MySQL Server
+使用時，不能放到 /vagrant_data/ 目錄下，必須要先移到其他目錄下執行。
 
 ### useage
 * Initial

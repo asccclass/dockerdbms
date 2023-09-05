@@ -56,12 +56,13 @@ runMySQL:
 	--env-file ./envfile \
 	${MySQLxImg}
 	docker ps -a
+	make log
 
 runPhpMyAdmin:
 	docker run -itd --rm --name ${PMA} \
 	--link ${ContainerName} \
 	-e PMA_HOST="${ContainerName}" \
-	-p 10080:80 ${PMAContainerName}
+	-p 13306:80 ${PMAContainerName}
 	docker ps -a
 
 run: runMySQL runPhpMyAdmin
@@ -73,3 +74,6 @@ rm:
 
 test:
 	docker exec ${ContainerName} mysqladmin -uroot -p${DBPASSWORD} ping
+
+log:
+	docker logs -f -t --tail 20 ${ContainerName}
