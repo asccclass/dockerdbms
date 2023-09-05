@@ -77,3 +77,5 @@ test:
 
 log:
 	docker logs -f -t --tail 20 ${ContainerName}
+s:
+	git push -u origin master
