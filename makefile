@@ -19,6 +19,7 @@ backup:
 	#docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} laitaian > laitaian.sql
 	#docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} urpanda > urpanda.sql
 	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} ascare > ascare.sql
+	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} hakka > hakka.sql
 
 import:
 	# docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 < privileges.sql
@@ -28,6 +29,7 @@ import:
 	# docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=urpanda < urpanda.sql
 	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=assns < assns.sql
 	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=ascare < ascare.sql
+	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=hakka < hakka.sql
 
 logs:
 	docker logs -f -t --tail 20 ${ContainerName}
