@@ -7,7 +7,7 @@ DBPASSWORD?=webteam@2019
 
 MKFILE := $(abspath $(lastword $(MAKEFILE_LIST)))
 CURDIR := $(dir $(MKFILE))
-SpecDir ?=/root/mysql
+SpecDir ?=/root/db
 
 login: 
 	docker exec -it ${ContainerName} mysql -uroot -p
@@ -18,7 +18,7 @@ backup:
 	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} records > records.sql
 	#docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} laitaian > laitaian.sql
 	#docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} urpanda > urpanda.sql
-	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} ascare > ascare.sql
+	#docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} ascare > ascare.sql
 	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} hakka > hakka.sql
 
 import:
@@ -28,7 +28,7 @@ import:
 	# docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=laitaian < laitaian.sql
 	# docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=urpanda < urpanda.sql
 	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=assns < assns.sql
-	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=ascare < ascare.sql
+	#docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=ascare < ascare.sql
 	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=hakka < hakka.sql
 
 logs:
