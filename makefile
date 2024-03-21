@@ -7,7 +7,7 @@ DBPASSWORD?=webteam@2019
 
 MKFILE := $(abspath $(lastword $(MAKEFILE_LIST)))
 CURDIR := $(dir $(MKFILE))
-SpecDir ?=/root/db
+SpecDir ?=/root/db/
 
 login: 
 	docker exec -it ${ContainerName} mysql -uroot -p
@@ -57,8 +57,8 @@ stop:stopPMA stopMySQL
 runMySQL:
 	docker run -itd --name ${ContainerName} \
 	-p 3306:3306 \
-	-v ${SpecDir}/logs:/logs \
-	-v ${SpecDir}/data:/var/lib/mysql \
+	-v ${SpecDir}logs:/logs \
+	-v ${SpecDir}data:/var/lib/mysql \
 	--env-file ./envfile \
 	${MySQLxImg}
 	docker ps -a
