@@ -26,12 +26,13 @@ CREATE TABLE `lius` (
   `liusID` int(11) NOT NULL AUTO_INCREMENT,
   `namez` varchar(30) NOT NULL COMMENT '姓名',
   `generation` int(11) NOT NULL DEFAULT '0' COMMENT '第n代',
+  `roomOrder` int(11) NOT NULL DEFAULT '0' COMMENT '第幾房',
   `siblingOrder` int(11) NOT NULL DEFAULT '1' COMMENT '第幾房',
   `parentID` int(11) NOT NULL DEFAULT '0' COMMENT '父親ID',
   `meno` text NOT NULL COMMENT '備註',
   `source` varchar(50) NOT NULL,
   PRIMARY KEY (`liusID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='劉氏族譜';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='劉氏族譜';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +41,7 @@ CREATE TABLE `lius` (
 
 LOCK TABLES `lius` WRITE;
 /*!40000 ALTER TABLE `lius` DISABLE KEYS */;
+INSERT INTO `lius` VALUES (1,'劉廣傳',141,2,2,0,'字源遠，號毓正，別號劉弁公。',''),(2,'劉巨河',142,2,11,1,'字禎。官翰林學士為山西提學使',''),(3,'劉時泰',143,3,1,2,'名寧',''),(4,'劉均玉',144,3,1,3,'江西洋角水把總',''),(5,'劉勝寶',145,1,2,4,'',''),(6,'劉勝宗',145,1,1,4,'',''),(7,'劉榮祖',146,1,2,5,'',''),(8,'劉承祖',146,1,1,5,'','');
 /*!40000 ALTER TABLE `lius` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-19  0:36:27
+-- Dump completed on 2024-08-19  1:36:02
