@@ -47,11 +47,12 @@ DROP TABLE IF EXISTS `teams`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teams` (
-  `teamID` int(11) NOT NULL AUTO_INCREMENT,
+  `groupID` int(11) NOT NULL AUTO_INCREMENT,
+  `schoolID` int(11) NOT NULL DEFAULT '0',
   `namez` varchar(60) NOT NULL COMMENT '組別名稱',
   `description` text NOT NULL COMMENT '描述',
   `serialz` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
-  PRIMARY KEY (`teamID`)
+  PRIMARY KEY (`groupID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -73,10 +74,12 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `userID` int(11) NOT NULL AUTO_INCREMENT,
+  `grouplID` int(11) NOT NULL DEFAULT '0',
   `lineID` varchar(120) NOT NULL COMMENT 'LINE ID',
   `taipePassID` varchar(120) NOT NULL COMMENT '台北通ID',
   `namez` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `isManager` int(11) NOT NULL DEFAULT '0' COMMENT '是否為該校總管理者',
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='志工基本資料表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -124,4 +127,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-23  4:06:43
+-- Dump completed on 2024-08-19  0:36:27

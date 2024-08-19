@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.44, for Linux (x86_64)
 --
--- Host: localhost    Database: sitemanager
+-- Host: localhost    Database: lius
 -- ------------------------------------------------------
 -- Server version	5.7.44
 
@@ -16,29 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `siteinfo`
+-- Table structure for table `lius`
 --
 
-DROP TABLE IF EXISTS `siteinfo`;
+DROP TABLE IF EXISTS `lius`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `siteinfo` (
-  `siteID` int(11) NOT NULL AUTO_INCREMENT,
-  `typez` int(11) NOT NULL DEFAULT '0' COMMENT '類型： page)一般頁面  struct)網站架構',
-  `template` int(11) NOT NULL DEFAULT '0' COMMENT '使用的樣板名稱',
-  `lang` int(11) NOT NULL DEFAULT '0',
-  `title` varchar(50) NOT NULL COMMENT '網站標題',
-  PRIMARY KEY (`siteID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `lius` (
+  `liusID` int(11) NOT NULL AUTO_INCREMENT,
+  `namez` varchar(30) NOT NULL COMMENT '姓名',
+  `generation` int(11) NOT NULL DEFAULT '0' COMMENT '第n代',
+  `siblingOrder` int(11) NOT NULL DEFAULT '1' COMMENT '第幾房',
+  `parentID` int(11) NOT NULL DEFAULT '0' COMMENT '父親ID',
+  `meno` text NOT NULL COMMENT '備註',
+  `source` varchar(50) NOT NULL,
+  PRIMARY KEY (`liusID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='劉氏族譜';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `siteinfo`
+-- Dumping data for table `lius`
 --
 
-LOCK TABLES `siteinfo` WRITE;
-/*!40000 ALTER TABLE `siteinfo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `siteinfo` ENABLE KEYS */;
+LOCK TABLES `lius` WRITE;
+/*!40000 ALTER TABLE `lius` DISABLE KEYS */;
+/*!40000 ALTER TABLE `lius` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

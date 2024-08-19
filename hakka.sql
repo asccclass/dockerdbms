@@ -71,6 +71,81 @@ INSERT INTO `author` VALUES (1,'李遠','師範大學生物系畢業，美國紐
 UNLOCK TABLES;
 
 --
+-- Table structure for table `dictexample`
+--
+
+DROP TABLE IF EXISTS `dictexample`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `dictexample` (
+  `expID` int(11) NOT NULL AUTO_INCREMENT,
+  `meanID` int(11) NOT NULL DEFAULT '0',
+  `exp` text NOT NULL,
+  `descz` text NOT NULL,
+  PRIMARY KEY (`expID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `dictexample`
+--
+
+LOCK TABLES `dictexample` WRITE;
+/*!40000 ALTER TABLE `dictexample` DISABLE KEYS */;
+INSERT INTO `dictexample` VALUES (1,1,'共偕來聊','一起來玩');
+/*!40000 ALTER TABLE `dictexample` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `dictmeans`
+--
+
+DROP TABLE IF EXISTS `dictmeans`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `dictmeans` (
+  `meanID` int(11) NOT NULL AUTO_INCREMENT,
+  `wordID` int(11) NOT NULL DEFAULT '0',
+  `explainz` varchar(50) NOT NULL,
+  PRIMARY KEY (`meanID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `dictmeans`
+--
+
+LOCK TABLES `dictmeans` WRITE;
+/*!40000 ALTER TABLE `dictmeans` DISABLE KEYS */;
+INSERT INTO `dictmeans` VALUES (1,1,'共同；一起');
+/*!40000 ALTER TABLE `dictmeans` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `dicts`
+--
+
+DROP TABLE IF EXISTS `dicts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `dicts` (
+  `wordID` int(11) NOT NULL AUTO_INCREMENT,
+  `wordz` varchar(20) NOT NULL,
+  PRIMARY KEY (`wordID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `dicts`
+--
+
+LOCK TABLES `dicts` WRITE;
+/*!40000 ALTER TABLE `dicts` DISABLE KEYS */;
+INSERT INTO `dicts` VALUES (1,'共偕');
+/*!40000 ALTER TABLE `dicts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `works`
 --
 
@@ -110,4 +185,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-23  4:06:43
+-- Dump completed on 2024-08-19  0:36:27

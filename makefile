@@ -18,7 +18,7 @@ backup:
 	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} records > records.sql
 	#docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} laitaian > laitaian.sql
 	#docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} urpanda > urpanda.sql
-	#docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} ascare > ascare.sql
+	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} lius > lius.sql
 	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} hakka > hakka.sql
 	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} sitemanager > sitemanager.sql
 	docker exec -it ${ContainerName} mysqldump -uroot -p${DBPASSWORD} volunteers > volunteers.sql
@@ -28,7 +28,7 @@ import:
 	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=${DBNAME} < ${DBNAME}.sql
 	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=records < records.sql
 	# docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=laitaian < laitaian.sql
-	# docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=urpanda < urpanda.sql
+	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=lius < lius.sql
 	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=assns < assns.sql
 	#docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=ascare < ascare.sql
 	docker exec -i ${ContainerName} mysql -uroot -pwebteam@2019 --database=hakka < hakka.sql
