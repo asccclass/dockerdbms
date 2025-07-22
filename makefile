@@ -1,4 +1,5 @@
-MySQLxImg?=mysql:5.7
+Version=5.7
+MySQLxImg?=mysql:${Version}
 ContainerName?=MySQLx
 PMA?=MySQLxPMA
 PMAContainerName=phpmyadmin/phpmyadmin
@@ -68,6 +69,9 @@ runMySQL:
 
 runPhpMyAdmin:
 	docker run -itd --rm --name ${PMA} \
+	-v ${CURDIR}config.custom:/etc/apache2/sites-enabled \
+	-v ${CURDIR}tmp:/var/lib/phpmyadmin/ \
+	-v ${CURDIR}config.inc.php:/var/www/html/config.inc.php \
 	--link ${ContainerName} \
 	-e PMA_HOST="${ContainerName}" \
 	-p 13306:80 ${PMAContainerName}
@@ -85,5 +89,8 @@ test:
 
 log:
 	docker logs -f -t --tail 20 ${ContainerName}
+
+login:
+	docker exec -it MySQLxPMA bash
 s:
 	git push -u origin master
