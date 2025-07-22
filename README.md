@@ -47,6 +47,13 @@ docker exec ${ContainerName} mysqladmin -uroot -p${DBPASSWORD} ping
 ```
 
 ### Use phpmyadmin
+
 ```
 http://yourIP/
+```
+
+### 登入 phpmyadmin's container
+
+```
+docker exec -it MySQLxPMA base 
 ```
